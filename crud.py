@@ -1,0 +1,65 @@
+from database import SessionLocal
+from models import Book 
+
+if __name__ == "__main__":
+	# create a session
+	db = SessionLocal()
+	try:
+		db.add(Book(title="The Great Gatsby", author="F. Scott Fitzgerald", genre="Fiction", publication_year=1925, language="English"))
+		db.add(Book(title="To Kill a Mockingbird", author="Harper Lee", genre="Fiction", publication_year=1960, language="English"))
+		db.add(Book(title="1984", author="George Orwell", genre="Dystopian", publication_year=1949, language="English"))
+		db.add(Book(title="Moby Dick", author="Herman Melville", genre="Adventure", publication_year=1851, language="English"))
+		db.add(Book(title="War and Peace", author="Leo Tolstoy", genre="Historical", publication_year=1869, language="Russian"))
+		db.add(Book(title="Pride and Prejudice", author="Jane Austen", genre="Romance", publication_year=1813, language="English"))
+		db.add(Book(title="The Hobbit", author="J.R.R. Tolkien", genre="Fantasy", publication_year=1937, language="English"))
+		db.add(Book(title="The Catcher in the Rye", author="J.D. Salinger", genre="Fiction", publication_year=1951, language="English"))
+		db.add(Book(title="Brave New World", author="Aldous Huxley", genre="Dystopian", publication_year=1932, language="English"))
+		db.add(Book(title="Crime and Punishment", author="Fyodor Dostoevsky", genre="Psychological", publication_year=1866, language="Russian"))
+
+		db.add(Book(title="The Alchemist", author="Paulo Coelho", genre="Philosophical", publication_year=1988, language="Portuguese"))
+		db.add(Book(title="The Kite Runner", author="Khaled Hosseini", genre="Drama", publication_year=2003, language="English"))
+		db.add(Book(title="Harry Potter 1", author="J.K. Rowling", genre="Fantasy", publication_year=1997, language="English"))
+		db.add(Book(title="Harry Potter 2", author="J.K. Rowling", genre="Fantasy", publication_year=1998, language="English"))
+		db.add(Book(title="Harry Potter 3", author="J.K. Rowling", genre="Fantasy", publication_year=1999, language="English"))
+		db.add(Book(title="Harry Potter 4", author="J.K. Rowling", genre="Fantasy", publication_year=2000, language="English"))
+		db.add(Book(title="Harry Potter 5", author="J.K. Rowling", genre="Fantasy", publication_year=2003, language="English"))
+		db.add(Book(title="Harry Potter 6", author="J.K. Rowling", genre="Fantasy", publication_year=2005, language="English"))
+		db.add(Book(title="Harry Potter 7", author="J.K. Rowling", genre="Fantasy", publication_year=2007, language="English"))
+		db.add(Book(title="The Lord of the Rings 1", author="J.R.R. Tolkien", genre="Fantasy", publication_year=1954, language="English"))
+
+		db.add(Book(title="The Lord of the Rings 2", author="J.R.R. Tolkien", genre="Fantasy", publication_year=1954, language="English"))
+		db.add(Book(title="The Lord of the Rings 3", author="J.R.R. Tolkien", genre="Fantasy", publication_year=1955, language="English"))
+		db.add(Book(title="The Da Vinci Code", author="Dan Brown", genre="Thriller", publication_year=2003, language="English"))
+		db.add(Book(title="Angels and Demons", author="Dan Brown", genre="Thriller", publication_year=2000, language="English"))
+		db.add(Book(title="Digital Fortress", author="Dan Brown", genre="Thriller", publication_year=1998, language="English"))
+		db.add(Book(title="Deception Point", author="Dan Brown", genre="Thriller", publication_year=2001, language="English"))
+		db.add(Book(title="The Shining", author="Stephen King", genre="Horror", publication_year=1977, language="English"))
+		db.add(Book(title="It", author="Stephen King", genre="Horror", publication_year=1986, language="English"))
+		db.add(Book(title="Dracula", author="Bram Stoker", genre="Horror", publication_year=1897, language="English"))
+		db.add(Book(title="Frankenstein", author="Mary Shelley", genre="Horror", publication_year=1818, language="English"))
+
+		db.add(Book(title="The Hunger Games", author="Suzanne Collins", genre="Dystopian", publication_year=2008, language="English"))
+		db.add(Book(title="Catching Fire", author="Suzanne Collins", genre="Dystopian", publication_year=2009, language="English"))
+		db.add(Book(title="Mockingjay", author="Suzanne Collins", genre="Dystopian", publication_year=2010, language="English"))
+		db.add(Book(title="The Maze Runner", author="James Dashner", genre="Sci-Fi", publication_year=2009, language="English"))
+		db.add(Book(title="The Scorch Trials", author="James Dashner", genre="Sci-Fi", publication_year=2010, language="English"))
+		db.add(Book(title="The Death Cure", author="James Dashner", genre="Sci-Fi", publication_year=2011, language="English"))
+		db.add(Book(title="Dune", author="Frank Herbert", genre="Sci-Fi", publication_year=1965, language="English"))
+		db.add(Book(title="Foundation", author="Isaac Asimov", genre="Sci-Fi", publication_year=1951, language="English"))
+		db.add(Book(title="The Martian", author="Andy Weir", genre="Sci-Fi", publication_year=2011, language="English"))
+		db.add(Book(title="Ready Player One", author="Ernest Cline", genre="Sci-Fi", publication_year=2011, language="English"))
+
+		db.add(Book(title="The Book Thief", author="Markus Zusak", genre="Historical", publication_year=2005, language="English"))
+		db.add(Book(title="The Fault in Our Stars", author="John Green", genre="Romance", publication_year=2012, language="English"))
+		db.add(Book(title="Twilight", author="Stephenie Meyer", genre="Romance", publication_year=2005, language="English"))
+		db.add(Book(title="New Moon", author="Stephenie Meyer", genre="Romance", publication_year=2006, language="English"))
+		db.add(Book(title="Eclipse", author="Stephenie Meyer", genre="Romance", publication_year=2007, language="English"))
+		db.add(Book(title="Breaking Dawn", author="Stephenie Meyer", genre="Romance", publication_year=2008, language="English"))
+		db.add(Book(title="The Girl with the Dragon Tattoo", author="Stieg Larsson", genre="Thriller", publication_year=2005, language="Swedish"))
+		db.add(Book(title="Gone Girl", author="Gillian Flynn", genre="Thriller", publication_year=2012, language="English"))
+		db.add(Book(title="The Silent Patient", author="Alex Michaelides", genre="Thriller", publication_year=2019, language="English"))
+		db.add(Book(title="Verity", author="Colleen Hoover", genre="Thriller", publication_year=2018, language="English"))
+
+		db.commit()
+	finally:
+		db.close()
