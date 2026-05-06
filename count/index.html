@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Random Number Generator</title>
+    <style>
+      :root {
+        --bg: #0f1a2b;
+        --card: #14233a;
+        --accent: #ff9f1c;
+        --text: #f5f7ff;
+        --muted: #b8c0d9;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+        background: radial-gradient(
+          circle at top,
+          #1b2b49 0%,
+          #0f1a2b 55%,
+          #0a1220 100%
+        );
+        color: var(--text);
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      .card {
+        width: min(520px, 100%);
+        background: linear-gradient(180deg, #1b2d4f 0%, #14233a 100%);
+        border: 1px solid #233a5f;
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        letter-spacing: 0.5px;
+      }
+
+      p {
+        margin: 0 0 20px;
+        color: var(--muted);
+      }
+
+      form {
+        display: grid;
+        gap: 14px;
+      }
+
+      .row {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      label {
+        font-size: 14px;
+        color: var(--muted);
+        margin-bottom: 6px;
+        display: block;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #2a4067;
+        background: #0d1628;
+        color: var(--text);
+        font-size: 16px;
+      }
+
+      button {
+        border: none;
+        background: var(--accent);
+        color: #1c1200;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 12px 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+
+      button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 16px rgba(255, 159, 28, 0.3);
+      }
+
+      .result {
+        margin-top: 18px;
+        padding: 16px;
+        border-radius: 12px;
+        background: #0d1628;
+        border: 1px dashed #2c466f;
+        text-align: center;
+        font-size: 22px;
+        min-height: 52px;
+      }
+
+      .error {
+        color: #ffb3a7;
+        font-size: 14px;
+        min-height: 18px;
+      }
+
+      @media (max-width: 520px) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>Random Number</h1>
+      <p>Enter a minimum and maximum value, then generate a random number.</p>
+
+      <form id="randomForm">
+        <div class="row">
+          <div>
+            <label for="minVal">Minimum</label>
+            <input id="minVal" name="minVal" type="number" required />
+          </div>
+          <div>
+            <label for="maxVal">Maximum</label>
+            <input id="maxVal" name="maxVal" type="number" required />
+          </div>
+        </div>
+        <button type="submit">Generate</button>
+      </form>
+
+      <div class="error" id="errorMsg"></div>
+      <div class="result" id="resultBox">Ready</div>
+    </main>
+
+    <script>
+      const form = document.getElementById("randomForm");
+      const minInput = document.getElementById("minVal");
+      const maxInput = document.getElementById("maxVal");
+      const resultBox = document.getElementById("resultBox");
+      const errorMsg = document.getElementById("errorMsg");
+      const baseUrl =
+        window.location.origin === "null"
+          ? "http://127.0.0.1:8000"
+          : window.location.origin;
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        errorMsg.textContent = "";
+        resultBox.textContent = "Working...";
+
+        const minVal = Number(minInput.value);
+        const maxVal = Number(maxInput.value);
+
+        if (Number.isNaN(minVal) || Number.isNaN(maxVal)) {
+          errorMsg.textContent = "Please enter valid numbers.";
+          resultBox.textContent = "Ready";
+          return;
+        }
+
+        if (minVal > maxVal) {
+          errorMsg.textContent =
+            "Minimum must be less than or equal to maximum.";
+          resultBox.textContent = "Ready";
+          return;
+        }
+
+        try {
+          const response = await fetch(`${baseUrl}/random/${minVal}/${maxVal}`);
+          if (!response.ok) {
+            throw new Error("Request failed");
+          }
+          const data = await response.json();
+          resultBox.textContent = data.random_number;
+        } catch (error) {
+          errorMsg.textContent = "Could not fetch a random number.";
+          resultBox.textContent = "Ready";
+        }
+      });
+    </script>
+  </body>
+</html>
